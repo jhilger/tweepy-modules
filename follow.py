@@ -13,4 +13,4 @@ accountToFollow = input("Enter the @ name of the account you wish to follow: ")
 
 # follow account
 name = api.create_friendship(screen_name = accountToFollow)
-print("Successfully followed @", name.screen_name)
+print("Successfully followed @" + name.screen_name)
