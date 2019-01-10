@@ -9,7 +9,7 @@ auth.set_access_token('635128344-KhtiQylAT8brKzlkQPDns5Z2dpbhw4wZCH9bvSE8', 'ZhJ
 # Connect to Twitter
 api = tweepy.API(auth)
 
-accountToFollow = "jack"
+accountToFollow = input("Enter the @ name of the account you wish to follow: ")
 
 # follow account
 name = api.create_friendship(screen_name = accountToFollow)
