@@ -1,4 +1,4 @@
-# simple program to follow whatever account you enter based on @name
+# program to follow account you enter based on @name
 
 import tweepy
 
@@ -11,6 +11,11 @@ api = tweepy.API(auth)
 
 accountToFollow = input("Enter the @ name of the account you wish to follow: ")
 
-# follow account
-name = api.create_friendship(screen_name = accountToFollow)
-print("Successfully followed @", name.screen_name)
+status = api.show_friendship(source_screen_name="joshhilger",
+                                 target_screen_name=accountToFollow)
+print(status[0].following)
+if status[0].following:
+    print("You already follow @" + accountToFollow)
+else:
+    name = api.create_friendship(screen_name = accountToFollow)
+    print("Successfully followed @" + name.screen_name)
