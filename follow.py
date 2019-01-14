@@ -2,20 +2,36 @@
 
 import tweepy
 
-# Credentials go here (generate at: https://apps.twitter.com)
-auth = tweepy.OAuthHandler('4jg8N5linHnCn2yh7TfRvg8tE', 'coVxVnFXOlz3EY0FyKyMPNxmNEdRjA2Ewp545YnqvtrSPyd6qk')
-auth.set_access_token('635128344-KhtiQylAT8brKzlkQPDns5Z2dpbhw4wZCH9bvSE8', 'ZhJNMn3vDAOy4sWQB64OvmQ3WxIDkgWBLbDEhKqMoXHsu')
 
-# Connect to Twitter
-api = tweepy.API(auth)
+def followAccount(api, userAccount):
 
-accountToFollow = input("Enter the @ name of the account you wish to follow: ")
+    accountToFollow = input("Enter the twitter @ of the account you wish to follow: ")
+    
+    status = api.show_friendship(source_screen_name=userAccount,
+                                     target_screen_name=accountToFollow)
 
-status = api.show_friendship(source_screen_name="joshhilger",
-                                 target_screen_name=accountToFollow)
-print(status[0].following)
-if status[0].following:
-    print("You already follow @" + accountToFollow)
-else:
-    name = api.create_friendship(screen_name = accountToFollow)
-    print("Successfully followed @" + name.screen_name)
+    if status[0].following:
+        print("You already follow @" + accountToFollow)
+    else:
+        name = api.create_friendship(screen_name = accountToFollow)
+        print("Successfully followed @" + name.screen_name)  
+
+    yn = input("Would you like to follow someone else? y/n: ")
+    if yn == 'y':
+        followAccount(api, userAccount)
+    else:
+        print("You're done!")
+
+def main():
+    # Credentials go here (generate at: https://apps.twitter.com)
+    auth = tweepy.OAuthHandler('4jg8N5linHnCn2yh7TfRvg8tE', 'coVxVnFXOlz3EY0FyKyMPNxmNEdRjA2Ewp545YnqvtrSPyd6qk')
+    auth.set_access_token('635128344-KhtiQylAT8brKzlkQPDns5Z2dpbhw4wZCH9bvSE8', 'ZhJNMn3vDAOy4sWQB64OvmQ3WxIDkgWBLbDEhKqMoXHsu')
+
+    # Connect to Twitter
+    api = tweepy.API(auth)
+    
+    userAccount = input("Enter your twitter @: ")
+
+    followAccount(api, userAccount)
+main()
+
