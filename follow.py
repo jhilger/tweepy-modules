@@ -16,11 +16,16 @@ def followAccount(api, userAccount):
         name = api.create_friendship(screen_name = accountToFollow)
         print("Successfully followed @" + name.screen_name)  
 
+def yesOrNo(api, userAccount):
     yn = input("Would you like to follow someone else? y/n: ")
-    if yn == 'y':
-        followAccount(api, userAccount)
-    else:
+    if yn == 'y'.lower():
+        main()
+    elif yn == 'n'.lower():
         print("You're done!")
+    else:
+        print("Invalid input")
+        main()
+        
 
 def main():
     # Credentials go here (generate at: https://apps.twitter.com)
@@ -33,5 +38,5 @@ def main():
     userAccount = input("Enter your twitter @: ")
 
     followAccount(api, userAccount)
+    yesOrNo(api, userAccount)
 main()
-
