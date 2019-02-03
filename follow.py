@@ -23,7 +23,7 @@ def yesOrNo(api, userAccount):
     elif yn == 'n'.lower():
         print("You're done!")
     else:
-        print("Invalid input")
+        print("Invalid input!")
         main()
         
 
